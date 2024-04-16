@@ -1,4 +1,6 @@
 #include <iostream>
+#include "pagamento.hpp"
+#include "renovacao.hpp"
 #include "chat.hpp"
 #include "biblioteca.hpp"
 #include "pagamento_multas.hpp"
@@ -41,8 +43,21 @@ int main() {
         cout << "Desculpe, o livro '" << tituloParaReserva << "' nao esta disponivel para reserva.\n";
     }
 
-    listarMultasDisponiveis();
+    std::vector<Livro> acervo = {
+        {"A Revolucao dos Bichos", "George Orwell", 14, true},
+        {"O Senhor dos Aneis", "J.R.R. Tolkien", 7, false},
+        {"1984", "George Orwell", 21, true}
+    };
 
+    listarLivrosDisponiveis(acervo);
+
+    std::string titulo;
+    std::cout << "\nDigite o titulo do livro que deseja renovar o emprestimo: ";
+    std::getline(std::cin, titulo);
+
+    renovarEmprestimo(acervo, titulo);
+ 
+    listarMultasDisponiveis();
     int indiceSelecionado;
     cout << "\nSelecione o numero da multa que deseja pagar: ";
     cin >> indiceSelecionado;
