@@ -1,5 +1,4 @@
 #include <iostream>
-#include "pagamento.hpp"
 #include "renovacao.hpp"
 #include "chat.hpp"
 #include "biblioteca.hpp"
