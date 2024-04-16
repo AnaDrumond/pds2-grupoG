@@ -6,11 +6,20 @@ BUILD = ./build
 SRC = ./src
 INCLUDE = ./include
 
-${BUILD}/${TARGET}: ${BUILD}/pagamento.o ${BUILD}/main.o
-	${CC} ${CFLAGS} ${BUILD}/pagamento.o ${BUILD}/main.o -o ${BUILD}/${TARGET}
+${BUILD}/${TARGET}: ${BUILD}/pagamento_multas.o ${BUILD}/biblioteca.o ${BUILD}/chat.o ${BUILD}/notificacoes.o  ${BUILD}/main.o 
+	${CC} ${CFLAGS} ${BUILD}/pagamento_multas.o ${BUILD}/biblioteca.o ${BUILD}/chat.o ${BUILD}/notificacoes.o ${BUILD}/main.o -o ${BUILD}/${TARGET}
 
-${BUILD}/pagamento.o: ${INCLUDE}/pagamento.hpp ${SRC}/pagamento.cpp
-	${CC} ${CFLAGS} -I ${INCLUDE}/ -c ${SRC}/pagamento.cpp -o ${BUILD}/pagamento.o
+${BUILD}/pagamento_multas.o: ${INCLUDE}/pagamento_multas.hpp ${SRC}/pagamento_multas.cpp
+	${CC} ${CFLAGS} -I ${INCLUDE}/ -c ${SRC}/pagamento_multas.cpp -o ${BUILD}/pagamento_multas.o
 
-${BUILD}/main.o: ${INCLUDE}/pagamento.hpp main.cpp
+${BUILD}/biblioteca.o: ${INCLUDE}/biblioteca.hpp ${SRC}/biblioteca.cpp
+	${CC} ${CFLAGS} -I ${INCLUDE}/ -c ${SRC}/biblioteca.cpp -o ${BUILD}/biblioteca.o
+
+${BUILD}/chat.o: ${INCLUDE}/chat.hpp ${SRC}/chat.cpp
+	${CC} ${CFLAGS} -I ${INCLUDE}/ -c ${SRC}/chat.cpp -o ${BUILD}/chat.o
+
+${BUILD}/notificacoes.o: ${INCLUDE}/notificacoes.hpp ${SRC}/notificacoes.cpp
+	${CC} ${CFLAGS} -I ${INCLUDE}/ -c ${SRC}/notificacoes.cpp -o ${BUILD}/notificacoes.o
+
+${BUILD}/main.o: ${INCLUDE}/pagamento_multas.hpp ${INCLUDE}/biblioteca.hpp ${INCLUDE}/chat.hpp ${INCLUDE}/notificacoes.hpp main.cpp
 	${CC} ${CFLAGS} -I ${INCLUDE}/ -c main.cpp -o ${BUILD}/main.o
